@@ -14,10 +14,12 @@ const loginUser = async (payload: { email: string; password: string }) => {
       status: UserStatus.ACTIVE,
     },
   });
+
   let checkingPassword;
   if (user) {
     checkingPassword = await bcrypt.compare(payload.password, user.password);
   }
+
   if (!checkingPassword) {
     throw new Error("Password does not match");
   }
@@ -78,7 +80,7 @@ const changePassword = async (user: any, payload: any) => {
 
   const checkingPassword = await bcrypt.compare(
     payload.oldPassword,
-    user.password
+    userData.password
   );
 
   if (!checkingPassword) {
@@ -93,7 +95,7 @@ const changePassword = async (user: any, payload: any) => {
       password: hashedPassword,
     },
   });
-  return null;
+  return true;
 };
 const forgetPassword = async (payload: { email: string }) => {
   const userData = await prisma.user.findUniqueOrThrow({
