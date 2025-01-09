@@ -37,4 +37,4 @@ router.delete(
   doctorScheduleControllers.deleteFromDB
 );
 
-export const DoctorScheduleRoutes = router;
+export const doctorScheduleRoutes = router;

@@ -35,4 +35,4 @@ router.delete(
   scheduleControllers.deleteFromDB
 );
 
-export const ScheduleRoutes = router;
+export const scheduleRoutes = router;

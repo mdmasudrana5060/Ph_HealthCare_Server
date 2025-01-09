@@ -1,37 +1,38 @@
-import express from "express";
-import { DoctorController } from "./doctor.controller";
+import { Router } from "express";
+
 import auth from "../../middlewares/auth";
 import { UserRole } from "@prisma/client";
 import validateRequest from "../../middlewares/validateRequest";
 import { DoctorValidation } from "./doctor.validation";
+import { doctorControllers } from "./doctor.controller";
 
-const router = express.Router();
+const router = Router();
 
 // task 3
-router.get("/", DoctorController.getAllFromDB);
+router.get("/", doctorControllers.getAllFromDB);
 
 //task 4
-router.get("/:id", DoctorController.getByIdFromDB);
+router.get("/:id", doctorControllers.getByIdFromDB);
 
 router.patch(
   "/:id",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR),
   validateRequest(DoctorValidation.update),
-  DoctorController.updateIntoDB
+  doctorControllers.updateIntoDB
 );
 
 //task 5
 router.delete(
   "/:id",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
-  DoctorController.deleteFromDB
+  doctorControllers.deleteFromDB
 );
 
 // task 6
 router.delete(
   "/soft/:id",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
-  DoctorController.softDelete
+  doctorControllers.softDelete
 );
 
-export const DoctorRoutes = router;
+export const doctorRoutes = router;
