@@ -168,8 +168,7 @@ model Appointment {
   doctorSchedules DoctorSchedules?
   prescription    Prescription?
   review          Review?
-
-  
+  payment Payment?
 }
 model Prescription {
   id            String      @id @default(uuid())
@@ -186,7 +185,6 @@ model Prescription {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
-  @@map("prescriptions")
 }
 
 model Review {
@@ -206,6 +204,20 @@ model Review {
   updatedAt DateTime @updatedAt
 
   
+}
+
+model Payment {
+  id            String      @id @default(uuid())
+  appointmentId String      @unique
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+
+  amount             Float
+  transactionId      String        @unique
+  status             PaymentStatus @default(UNPAID)
+  paymentGatewayData Json?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
 }
 enum UserRole { 
   SUPER_ADMIN

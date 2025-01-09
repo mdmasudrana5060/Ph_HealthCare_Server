@@ -1,8 +1,8 @@
-import prisma from "../../../shared/prisma";
+
 import { IAuthUser } from "../../interfaces/common";
 import { v4 as uuidv4 } from "uuid";
 import { IPaginationOptions } from "../../interfaces/pagination";
-import { paginationHelper } from "../../../helpars/paginationHelper";
+
 import {
   AppointmentStatus,
   PaymentStatus,
@@ -11,6 +11,8 @@ import {
 } from "@prisma/client";
 import ApiError from "../../errors/ApiError";
 import httpStatus from "http-status";
+import prisma from "../../../Shared/prisma";
+import { paginationHelper } from "../../../helpers/paginationHelpers";
 
 const createAppointment = async (user: IAuthUser, payload: any) => {
   const patientData = await prisma.patient.findUniqueOrThrow({

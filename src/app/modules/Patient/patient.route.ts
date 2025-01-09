@@ -12,4 +12,4 @@ router.patch("/:id", patientControllers.updateIntoDB);
 router.delete("/:id", patientControllers.deleteFromDB);
 router.delete("/soft/:id", patientControllers.softDelete);
 
-export const PatientRoutes = router;
+export const patientRoutes = router;
