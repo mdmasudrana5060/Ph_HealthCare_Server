@@ -170,6 +170,8 @@ model Appointment {
   prescription    Prescription?
   review          Review?
   payment Payment?
+      // to write raw query you should must use  @@map("appointments") without this raw query don't work
+  @@map("appointments")
 }
 model Prescription {
   id            String      @id @default(uuid())

@@ -10,6 +10,8 @@ import { appointmentRoutes } from "../modules/Appointment/appointment.route";
 import { patientRoutes } from "../modules/Patient/patient.route";
 import { paymentRoutes } from "../modules/Payment/payment.route";
 import { prescriptionRoutes } from "../modules/Prescription/prescription.route";
+import { metaRoutes } from "../modules/Meta/meta.route";
+import { reviewRoutes } from "../modules/Review/review.route";
 
 const router = Router();
 const moduleRoutes = [
@@ -56,6 +58,14 @@ const moduleRoutes = [
   {
     path: "/prescription",
     route: prescriptionRoutes,
+  },
+  {
+    path: "/review",
+    route: reviewRoutes,
+  },
+  {
+    path: "/meta",
+    route: metaRoutes,
   },
 ];
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
